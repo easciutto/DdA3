@@ -1,0 +1,21 @@
+{
+    "project_name":       "bootloader",
+    "project_path":       "/home/eas2/esp/esp-idf/components/bootloader/subproject",
+    "build_dir":          "/home/eas2/Documents/VSC2/DAIoT_2022-esp_idf-DHT11/build/bootloader",
+    "config_file":        "/home/eas2/Documents/VSC2/DAIoT_2022-esp_idf-DHT11/sdkconfig",
+    "config_defaults":    "",
+    "app_elf":            "bootloader.elf",
+    "app_bin":            "bootloader.bin",
+    "git_revision":       "v4.4.1-dirty",
+    "target":             "esp32",
+    "rev":                "0",
+    "phy_data_partition": "",
+    "monitor_baud" :      "115200",
+    "monitor_toolprefix": "xtensa-esp32-elf-",
+    "config_environment" : {
+        "COMPONENT_KCONFIGS" : "/home/eas2/esp/esp-idf/components/efuse/Kconfig;/home/eas2/esp/esp-idf/components/esp32/Kconfig;/home/eas2/esp/esp-idf/components/esp_common/Kconfig;/home/eas2/esp/esp-idf/components/esp_hw_support/Kconfig;/home/eas2/esp/esp-idf/components/esp_system/Kconfig;/home/eas2/esp/esp-idf/components/freertos/Kconfig;/home/eas2/esp/esp-idf/components/hal/Kconfig;/home/eas2/esp/esp-idf/components/log/Kconfig;/home/eas2/esp/esp-idf/components/newlib/Kconfig;/home/eas2/esp/esp-idf/components/spi_flash/Kconfig",
+        "COMPONENT_KCONFIGS_PROJBUILD" : "/home/eas2/esp/esp-idf/components/bootloader/Kconfig.projbuild;/home/eas2/esp/esp-idf/components/esp_rom/Kconfig.projbuild;/home/eas2/esp/esp-idf/components/esptool_py/Kconfig.projbuild;/home/eas2/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+    },
+    "build_components" : [ "bootloader", "bootloader_support", "efuse", "esp32", "esp_common", "esp_hw_support", "esp_rom", "esp_system", "esptool_py", "freertos", "hal", "log", "main", "micro-ecc", "newlib", "partition_table", "soc", "spi_flash", "xtensa", "" ],
+    "build_component_paths" : [ "/home/eas2/esp/esp-idf/components/bootloader", "/home/eas2/esp/esp-idf/components/bootloader_support", "/home/eas2/esp/esp-idf/components/efuse", "/home/eas2/esp/esp-idf/components/esp32", "/home/eas2/esp/esp-idf/components/esp_common", "/home/eas2/esp/esp-idf/components/esp_hw_support", "/home/eas2/esp/esp-idf/components/esp_rom", "/home/eas2/esp/esp-idf/components/esp_system", "/home/eas2/esp/esp-idf/components/esptool_py", "/home/eas2/esp/esp-idf/components/freertos", "/home/eas2/esp/esp-idf/components/hal", "/home/eas2/esp/esp-idf/components/log", "/home/eas2/esp/esp-idf/components/bootloader/subproject/main", "/home/eas2/esp/esp-idf/components/bootloader/subproject/components/micro-ecc", "/home/eas2/esp/esp-idf/components/newlib", "/home/eas2/esp/esp-idf/components/partition_table", "/home/eas2/esp/esp-idf/components/soc", "/home/eas2/esp/esp-idf/components/spi_flash", "/home/eas2/esp/esp-idf/components/xtensa", "" ]
+}

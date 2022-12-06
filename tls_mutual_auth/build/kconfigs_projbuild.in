@@ -1,0 +1,7 @@
+source "/home/eas2/esp/esp-idf/components/app_update/Kconfig.projbuild"
+source "/home/eas2/esp/esp-idf/components/bootloader/Kconfig.projbuild"
+source "/home/eas2/esp/esp-idf/components/esp_rom/Kconfig.projbuild"
+source "/home/eas2/esp/esp-idf/components/esptool_py/Kconfig.projbuild"
+source "/home/eas2/esp/esp-idf/components/partition_table/Kconfig.projbuild"
+source "/home/eas2/Documents/varios/aws-master/esp-aws-iot/examples/mqtt/tls_mutual_auth/main/Kconfig.projbuild"
+source "/home/eas2/esp/esp-idf/examples/common_components/protocol_examples_common/Kconfig.projbuild"
