@@ -1,7 +1,7 @@
 /* 
 
 	DHT11 temperature sensor driver
-	based on DHT22 from Leopoldo Zimperz
+	
 
 */
 
