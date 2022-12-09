@@ -75,6 +75,8 @@
 /* Clock for timer. */
 #include "clock.h"
 
+#include "DHT11.h"
+
 /**
  * These configuration settings are required to run the mutual auth demo.
  * Throw compilation error if the below configs are not defined.
@@ -189,7 +191,7 @@
  * The topic name starts with the client identifier to ensure that each demo
  * interacts with a unique topic name.
  */
-#define MQTT_EXAMPLE_TOPIC                  CLIENT_IDENTIFIER "/example/topic"
+#define MQTT_EXAMPLE_TOPIC                  CLIENT_IDENTIFIER "/pub"
 
 /**
  * @brief Length of client MQTT topic.
@@ -1306,6 +1308,18 @@ static int unsubscribeFromTopic( MQTTContext_t * pMqttContext )
     return returnStatus;
 }
 
+
+
+int64_t xx_time_get_time() {
+	struct timeval tv;
+	gettimeofday(&tv, NULL);
+	return (tv.tv_sec * 1000LL + (tv.tv_usec / 1000LL));
+}
+
+
+
+
+
 /*-----------------------------------------------------------*/
 
 static int publishToTopic( MQTTContext_t * pMqttContext )
@@ -1328,12 +1342,95 @@ static int publishToTopic( MQTTContext_t * pMqttContext )
     }
     else
     {
+
+////////////////////////////////////////////////////////////////////////
+
         /* This example publishes to only one topic and uses QOS1. */
         outgoingPublishPackets[ publishIndex ].pubInfo.qos = MQTTQoS1;
         outgoingPublishPackets[ publishIndex ].pubInfo.pTopicName = MQTT_EXAMPLE_TOPIC;
         outgoingPublishPackets[ publishIndex ].pubInfo.topicNameLength = MQTT_EXAMPLE_TOPIC_LENGTH;
-        outgoingPublishPackets[ publishIndex ].pubInfo.pPayload = MQTT_EXAMPLE_MESSAGE;
-        outgoingPublishPackets[ publishIndex ].pubInfo.payloadLength = MQTT_EXAMPLE_MESSAGE_LENGTH;
+        
+        	char bufferJson[200];
+            char buffer_temp_txt[15];
+            char buffer_hume_txt[15];
+            char buffer_id_txt[15];
+            char buffer_timestamp_txt[15];
+
+            float temp = 12.34; // tomar del dth11
+            float hum = 99.9;   // tomar del dth11
+            int id = 101;
+            int64_t timestamp = xx_time_get_time();
+            setDHTgpio( 23 );
+
+            // // {
+            // // "fecha": 1670288275,
+            // // "ID": 101,
+            // // "temp": 24.60000038,
+            // // "humidity": 38
+            // // }
+
+            ///// ya estando inicializado el sensor de antemano....
+            //// aca incluis la lectura del sensor, no lo probe porque no lo tengo aca
+            int ret = readDHT();
+		
+            errorHandler(ret);
+
+                // // esto anularlo
+                // printf( "Hum %.1f\n", getHumidity() );
+                // printf( "Tmp %.1f\n", getTemperature() );
+
+                // // aca cargo las variables
+            hum = getHumidity();
+            temp = getTemperature();                
+
+
+			snprintf(buffer_temp_txt, sizeof(buffer_temp_txt), "%.2f", (float)temp);
+			snprintf(buffer_hume_txt, sizeof(buffer_hume_txt), "%.2f", (float)hum);
+            snprintf(buffer_id_txt, sizeof(buffer_id_txt), "%d", (int)id);
+            snprintf(buffer_timestamp_txt, sizeof(buffer_timestamp_txt), "%lld", (int64_t)timestamp);
+        
+            bufferJson[0] = 0;
+        	strcat(bufferJson, "{ \"fecha\": ");
+			strcat(bufferJson, buffer_timestamp_txt);
+			strcat(bufferJson, ", \"ID\": ");
+			strcat(bufferJson, buffer_id_txt);
+			strcat(bufferJson, ", \"temp\": ");
+			strcat(bufferJson, buffer_temp_txt);
+			strcat(bufferJson, ", \"humidity\": ");
+			strcat(bufferJson, buffer_hume_txt);
+			strcat(bufferJson, " }");
+        
+        
+        
+        
+        
+        outgoingPublishPackets[ publishIndex ].pubInfo.pPayload = bufferJson;
+        outgoingPublishPackets[ publishIndex ].pubInfo.payloadLength = strlen(bufferJson);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
         /* Get a new packet id. */
         outgoingPublishPackets[ publishIndex ].packetId = MQTT_GetPacketId( pMqttContext );
